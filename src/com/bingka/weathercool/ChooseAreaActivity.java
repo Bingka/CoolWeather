@@ -6,6 +6,8 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -50,6 +52,11 @@ public class ChooseAreaActivity extends Activity {
 	* 选中的城市
 	*/
 	private City selectedCity;
+	/**
+	/**
+	* 选中的县级
+	*/
+	private County selectedCounty;
 	/**
 	* 当前选中的级别
 	*/
@@ -96,6 +103,11 @@ public class ChooseAreaActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.choose_area);
+		SharedPreferences prefs = getSharedPreferences("WeatherInfo2", 0);
+		if (prefs.getBoolean("city_selected", false)) {
+			Intent intent = new Intent(this, WeatherActivity.class);
+			startActivity(intent);
+		}
 		initView();
 		
 	}
@@ -121,7 +133,14 @@ public class ChooseAreaActivity extends Activity {
 					queryCounties();
 				}else if(currentLevel == LEVEL_COUNTY){
 					//当前处于县级list，跳转到对应的天气信息界面
-					
+					android.util.Log.d("[YY]","currentLevel = "+currentLevel);
+					selectedCounty = countyList.get(position);
+					Intent intent = new Intent(ChooseAreaActivity.this,WeatherActivity.class);
+					String countyName = selectedCounty.getCountyName();
+					String countyCode = selectedCounty.getCountyCode();
+					intent.putExtra("countyName", countyName);
+					intent.putExtra("countyCode", countyCode);
+					startActivity(intent);
 				}
 			}
 		});
