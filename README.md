@@ -19,4 +19,7 @@ http://wthrcdn.etouch.cn/WeatherApi?city=北京
 通过城市名字获得天气数据  
 
 
-以上信息来自下面的博客：http://blog.csdn.net/fancylovejava/article/details/26102635
+
+以上信息来自下面的博客：http://blog.csdn.net/fancylovejava/article/details/26102635  
+
+最后说一点：Markdown还真不熟，怎么换行，百度了才知道，基础语法：http://lutaf.com/markdown-simple-usage.htm
